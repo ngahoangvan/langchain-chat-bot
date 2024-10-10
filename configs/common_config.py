@@ -63,6 +63,13 @@ class Config(BaseSettings):
     QDRANT_PORT: int = os.getenv("QDRANT_PORT", 443)
     QDRANT_GRPC_PORT: int = os.getenv("QDRANT_GRPC_PORT", 6334)
 
+    # Elasticsearch loggin
+    ELK_HOST: str = os.getenv("ELK_HOST", "localhost")
+    ELK_PORT: int = os.getenv("ELK_PORT", 9200)
+    ELK_INDEX: str = os.getenv("ELK_INDEX", "langchain-bot-logs")
+    ELK_USERNAME: str = os.getenv("ELK_USERNAME", "")
+    ELK_PASSWORD: str = os.getenv("ELK_PASSWORD", "")
+
     class Config:
         env_file = "./.env"
         extra = "allow"

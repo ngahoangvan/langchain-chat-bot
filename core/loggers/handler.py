@@ -4,6 +4,7 @@ import logging
 from elasticsearch import Elasticsearch
 from datetime import datetime
 from loguru import logger
+from configs.common_config import settings
 
 
 class InterceptHandler(logging.Handler):
@@ -35,6 +36,7 @@ class ELKHandler(logging.Handler):
                     'scheme': 'http'
                 }
             ],
+            basic_auth=(settings.ELK_USERNAME, settings.ELK_PASSWORD),
             verify_certs=False
         )
         self.index = index
