@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
+    container_name: slack-bot-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Python123
+      - POSTGRES_DB=postgres
+    volumes:
+      - ./docker_data/postgresql/data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+  worker:
+    container_name: slack-bot-worker
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    command: celery -A your_app_name worker --loglevel=info
+  
+  beat:
+    container_name: slack-bot-beat
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    command: celery -A your_app_name beat --loglevel=info
+
+  redis:
+    image: redis:latest
+    container_name: slack-bot-redis
+    ports:
+      - 6379:6379

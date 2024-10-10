@@ -1,0 +1,59 @@
+[tool.poetry]
+name = "langchain-slack-bot"
+version = "0.1.0"
+description = ""
+authors = ["Nga Hoang <ngahv2222@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+package-mode = false
+
+
+[tool.poetry.dependencies]
+python = "^3.10"
+langchain = "^0.3.0"
+fastapi = {extras = ["standard"], version = "^0.115.0"}
+python-dotenv = "^1.0.1"
+pytest-cov = "^5.0.0"
+sqlalchemy = "^2.0.35"
+loguru = "^0.7.2"
+gunicorn = "^23.0.0"
+langfuse = "^2.50.2"
+psycopg2 = "^2.9.9"
+langchain-community = "^0.3.0"
+alembic = "^1.13.2"
+uvicorn = "^0.30.6"
+hishel = {extras = ["sqlite"], version = "^0.0.30"}
+omegaconf = "^2.3.0"
+sse-starlette = "^2.1.3"
+langchain-openai = "^0.2.0"
+elasticsearch = "^8.15.1"
+slack-sdk = "^3.33.1"
+slack-bolt = "^1.20.1"
+redis = "^5.0.8"
+celery = {extras = ["redis"], version = "^5.4.0"}
+langchain-qdrant = "^0.1.4"
+wikipedia = "^1.4.0"
+
+
+[tool.poetry.group.dev.dependencies]
+jupyterlab = "^4.2.5"
+
+[tool.poetry.group.prod.dependencies]
+python-json-logger = "2.0.7"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.coverage.run]
+omit = [
+    # omit anything in a .local directory anywhere
+    "*/.local/*",
+    # omit everything in /usr
+    "/usr/*",
+    "*/libs/*",
+]
+
+[tool.pytest.ini_options]
+addopts = "-v --cov-report term --cov-report html:htmlcov --cov-report xml --cov-fail-under=80 --cov ./"
