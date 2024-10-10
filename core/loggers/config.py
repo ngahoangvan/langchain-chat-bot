@@ -4,14 +4,13 @@ from __future__ import annotations
 import logging
 import os
 import sys
-
-from loguru import logger
 from enum import Enum
 
-from .handler import InterceptHandler
+from loguru import logger
 
+from .handler import ELKHandler, InterceptHandler
+from configs.common_config import settings
 
-from .handler import InterceptHandler, ELKHandler
 
 class LoggingTarget(Enum):
     TERMINAL = "terminal"
@@ -24,11 +23,9 @@ LOGGERS = ("uvicorn.asgi", "uvicorn.access")
 LOGGING_TARGET = os.getenv("LOGGING_TARGET", LoggingTarget.TERMINAL.value)
 
 # ELK configuration
-ELK_HOST = os.getenv("ELK_HOST", "localhost")
-ELK_PORT = int(os.getenv("ELK_PORT", 9200))
-ELK_INDEX = os.getenv("ELK_INDEX", "fastapi-logs")
-ELK_USERNAME = os.getenv("ELK_USERNAME", "")
-ELK_PASSWORD = os.getenv("ELK_PASSWORD", "")
+ELK_HOST = settings.ELK_HOST
+ELK_PORT = settings.ELK_PORT
+ELK_INDEX = settings.ELK_INDEX
 
 
 # logging configuration
