@@ -60,3 +60,4 @@ docker_data/
 
 # cache data
 *.db
+.ipynb_checkpoints
