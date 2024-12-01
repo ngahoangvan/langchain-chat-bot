@@ -30,4 +30,5 @@ ENV PYTHONDONTWRITEBYTECODE 1
 # Prevents Python from buffering stdout and stderr
 ENV PYTHONUNBUFFERED 1
 
-CMD ["make", "start-prod"]
+RUN exec "$0"
+# CMD ["make", "start-prod"]
