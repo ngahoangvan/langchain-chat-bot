@@ -33,6 +33,7 @@ redis = "^5.0.8"
 celery = {extras = ["redis"], version = "^5.4.0"}
 langchain-qdrant = "^0.1.4"
 wikipedia = "^1.4.0"
+pre-commit = "^4.0.1"
 
 
 [tool.poetry.group.dev.dependencies]

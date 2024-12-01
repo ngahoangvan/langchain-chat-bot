@@ -37,13 +37,14 @@ async def handle_message(body, say):
     )
     memory.get_memory().save_context(
         {"input": text},
-        {"output": result['output']}
+        {"output": result['output']},
     )
+    memory.update_memory()
     await say(result['output'])
 
 
 @app.event("app_mention")
-async def handle_message(body, say):
+async def handle_app_mention(body, say):
     """Handle mentions of the bot in Slack.
 
     Args:
@@ -63,8 +64,9 @@ async def handle_message(body, say):
     )
     memory.save_context(
         {"input": text},
-        {"output": result['output']}
+        {"output": result['output']},
     )
+    memory.update_memory()
     await say(result['output'])
 
 
