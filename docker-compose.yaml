@@ -6,34 +6,52 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: slack-bot
     volumes:
       - $PWD:/src
     env_file:
       - .env
-    command: poetry run python bot.py
-    # command: tail -f /dev/null
+    environment:
+      - DATABASE_URI=postgresql://postgres:Python123@db/postgres
+    command: make run-bot
+    depends_on:
+      db:
+        condition: service_healthy
 
-  # app:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - 8000:8000
-    # command: make 
-    # depends_on:
-    #   - db
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: slack-bot-api
+    environment:
+      - DATABASE_URI=postgresql://postgres:Python123@db/postgres
+    env_file:
+      - .env
+    volumes:
+      - $PWD:/src
+    ports:
+      - 8000:8000
+    command: make run-api
+    depends_on:
+      db:
+        condition: service_healthy
 
-  # db:
-  #   image: postgres:latest
-  #   container_name: slack-bot-db
-  #   environment:
-  #     - POSTGRES_USER=postgres
-  #     - POSTGRES_PASSWORD=Python123
-  #     - POSTGRES_DB=postgres
-  #   volumes:
-  #     - ./docker_data/postgresql/data:/var/lib/postgresql/data
-  #   ports:
-  #     - 5432:5432
+  db:
+    image: postgres:latest
+    container_name: slack-bot-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Python123
+      - POSTGRES_DB=postgres
+    volumes:
+      - ./docker_data/postgresql/data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: pg_isready -U postgres -d postgres
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   # worker:
   #   container_name: slack-bot-worker

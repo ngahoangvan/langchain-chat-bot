@@ -1,15 +1,15 @@
 .PHONY: run-bot run-api
 
 # Default Python command
-PYTHON = python3
+PYTHON = poetry run python
 
 # Run the bot
 run-bot:
-	$(PYTHON) src/bot/main.py
+	@bash -c "start-bot.sh"
 
 # Run the API
 run-api:
-	$(PYTHON) src/api/app.py
+	@bash -c "start-uvicorn.sh"
 
 # Help command to list available targets
 help:
