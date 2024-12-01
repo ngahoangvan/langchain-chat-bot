@@ -1,14 +1,40 @@
 version: '3.8'
 
 services:
+
+  bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: slack-bot
+    volumes:
+      - $PWD:/src
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URI=postgresql://postgres:Python123@db/postgres
+    command: make run-bot
+    depends_on:
+      db:
+        condition: service_healthy
+
   app:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: slack-bot-api
+    environment:
+      - DATABASE_URI=postgresql://postgres:Python123@db/postgres
+    env_file:
+      - .env
+    volumes:
+      - $PWD:/src
     ports:
       - 8000:8000
+    command: make run-api
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   db:
     image: postgres:latest
@@ -21,27 +47,32 @@ services:
       - ./docker_data/postgresql/data:/var/lib/postgresql/data
     ports:
       - 5432:5432
+    healthcheck:
+      test: pg_isready -U postgres -d postgres
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
-  worker:
-    container_name: slack-bot-worker
-    build:
-      context: .
-      dockerfile: Dockerfile
-    depends_on:
-      - db
-    command: celery -A your_app_name worker --loglevel=info
+  # worker:
+  #   container_name: slack-bot-worker
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   depends_on:
+  #     - db
+  #   command: celery -A your_app_name worker --loglevel=info
   
-  beat:
-    container_name: slack-bot-beat
-    build:
-      context: .
-      dockerfile: Dockerfile
-    depends_on:
-      - db
-    command: celery -A your_app_name beat --loglevel=info
+  # beat:
+  #   container_name: slack-bot-beat
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   depends_on:
+  #     - db
+  #   command: celery -A your_app_name beat --loglevel=info
 
-  redis:
-    image: redis:latest
-    container_name: slack-bot-redis
-    ports:
-      - 6379:6379
+  # redis:
+  #   image: redis:latest
+  #   container_name: slack-bot-redis
+  #   ports:
+  #     - 6379:6379

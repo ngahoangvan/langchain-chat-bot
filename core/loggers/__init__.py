@@ -39,19 +39,5 @@ def configure_logging(name):
     logging_level = os.getenv("LOGGING_LEVEL", logging.DEBUG if DEBUG else logging.INFO)
     logger = logging.getLogger(name)
     logger.setLevel(logging_level)
-    # Create a console handler with a higher log level
-    # console_handler = logging.StreamHandler()
-    # console_handler.setLevel(logging_level)
-    # # Create a formatter and add it to the handlers
-    # default_formatter = logging.Formatter(
-    #     "[%(asctime)s] [%(levelname)s] [%(name)s] "
-    #     "[%(funcName)s():%(lineno)s] [PID:%(process)d TID:%(thread)d] %(message)s",
-    #     "%d/%m/%Y %H:%M:%S",
-    # )
-    # console_handler.setFormatter(default_formatter)
-    # if logger.hasHandlers():
-    #     logger.handlers.clear()
-
-    # logger.addHandler(console_handler)
 
     return logger
