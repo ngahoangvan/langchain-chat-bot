@@ -6,7 +6,7 @@ from slack_bolt.async_app import AsyncApp
 
 from configs.common_config import settings
 from core.ai.agents.slack_agent import SlackAgent
-from core.ai.memories.postgre_memory import PostgreChatMemoryMessage
+from core.ai.memories.postgres_memory import PostgresChatMemoryMessage
 from core.loggers import configure_logging
 
 load_dotenv(override=True)
@@ -27,7 +27,7 @@ async def handle_message(body, say):
     text = body["event"]["text"]
     channel = body["event"]["channel"]
     # Get memory instance for this channel
-    memory = PostgreChatMemoryMessage.get_instance(channel)
+    memory = PostgresChatMemoryMessage.get_instance(channel)
     chat_history = memory.get_chat_history()
     result = await slack_agent.ainvoke(
         input={
@@ -39,7 +39,6 @@ async def handle_message(body, say):
         {"input": text},
         {"output": result['output']},
     )
-    memory.update_memory()
     await say(result['output'])
 
 
@@ -54,7 +53,7 @@ async def handle_app_mention(body, say):
     text = body["event"]["text"]
     channel = body["event"]["channel"]
     # Get memory instance for this channel
-    memory = PostgreChatMemoryMessage.get_instance(channel)
+    memory = PostgresChatMemoryMessage.get_instance(channel)
     chat_history = memory.get_chat_history()
     result = await slack_agent.ainvoke(
         input={
@@ -66,7 +65,6 @@ async def handle_app_mention(body, say):
         {"input": text},
         {"output": result['output']},
     )
-    memory.update_memory()
     await say(result['output'])
 
 
