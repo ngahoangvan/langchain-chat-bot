@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  qdrant:
+    image: qdrant/qdrant:latest
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - ./docker_data/qdrant:/qdrant/storage
+    environment:
+      - QDRANT_ALLOW_RECOVERY=true
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6333/healthz"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
