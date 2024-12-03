@@ -5,9 +5,9 @@ This project aim to devvelop a chatbot for multiple platform like Slack, Google 
 ## List supported platform
 
 - [x] Slack
-- [] MS Team
-- [] Google Chat
-- [] Telegram
+- [ ] MS Team
+- [ ] Google Chat
+- [ ] Telegram
 
 ## Installation
 ### Pre-requisite
@@ -89,11 +89,10 @@ $ python bot.py
 ├── scripts              # Utility scripts
 └── test.py              # Test script
 ```
-```
 
 ## TODO list
 - [x] Use Langchain to create an AI agent
 - [x] Create a list of tools
 - [x] Slack Chatbot
-- [] Create Unit Test
-- [] Refactor Code
+- [ ] Create Unit Test
+- [ ] Refactor Code
