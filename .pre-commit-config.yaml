@@ -8,6 +8,10 @@ repos:
       - id: trailing-whitespace
       - id: debug-statements
       - id: name-tests-test
+        args:
+          - --pytest-test-first
+        exclude: 'tests/fixtures.*'
+
       - id: requirements-txt-fixer
       - id: pretty-format-json
         args:

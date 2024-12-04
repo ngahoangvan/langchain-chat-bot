@@ -13,7 +13,6 @@ python = "^3.10"
 langchain = "^0.3.0"
 fastapi = {extras = ["standard"], version = "^0.115.0"}
 python-dotenv = "^1.0.1"
-pytest-cov = "^5.0.0"
 sqlalchemy = "^2.0.35"
 loguru = "^0.7.2"
 gunicorn = "^23.0.0"
@@ -33,11 +32,16 @@ redis = "^5.0.8"
 celery = {extras = ["redis"], version = "^5.4.0"}
 langchain-qdrant = "^0.1.4"
 wikipedia = "^1.4.0"
-pre-commit = "^4.0.1"
 
 
 [tool.poetry.group.dev.dependencies]
 jupyterlab = "^4.2.5"
+faker = "^33.1.0"
+pytest = "^8.3.4"
+pytest-cov = "^6.0.0"
+pre-commit = "^4.0.1"
+pytest-asyncio = "^0.24.0"
+
 
 [tool.poetry.group.prod.dependencies]
 python-json-logger = "2.0.7"

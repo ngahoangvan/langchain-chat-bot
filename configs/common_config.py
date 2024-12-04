@@ -70,7 +70,7 @@ class Config(BaseSettings):
     ELK_USERNAME: str = os.getenv("ELK_USERNAME", "")
     ELK_PASSWORD: str = os.getenv("ELK_PASSWORD", "")
 
-    class Config:
+    class BaseConfig:
         env_file = "./.env"
         extra = "allow"
 
