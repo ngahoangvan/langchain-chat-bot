@@ -94,5 +94,8 @@ $ python bot.py
 - [x] Use Langchain to create an AI agent
 - [x] Create a list of tools
 - [x] Slack Chatbot
+- [ ] Integrate with Hugging Face
+- [ ] Integrate with Slack command
+- [ ] Intergrate with internal API
 - [ ] Create Unit Test
 - [ ] Refactor Code
