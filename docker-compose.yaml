@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-
   bot:
     build:
       context: .
@@ -61,7 +60,7 @@ services:
   #   depends_on:
   #     - db
   #   command: celery -A your_app_name worker --loglevel=info
-  
+
   # beat:
   #   container_name: slack-bot-beat
   #   build:
