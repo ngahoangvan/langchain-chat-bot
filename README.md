@@ -57,7 +57,6 @@ $ python bot.py
 
 ## Folder Structure
 ```bash
-```bash
 .
 ├── Dockerfile           # Docker configuration file for containerizing the application
 ├── Makefile             # Makefile for automating tasks
@@ -65,10 +64,10 @@ $ python bot.py
 ├── alembic.ini          # Alembic configuration file for database migrations
 ├── bot.py               # Main script to run the chatbot
 ├── celery_task          # Folder containing Celery tasks for asynchronous processing
+├── bots                 # Bot configucations
 ├── configs              # Configuration files for the project
 ├── core                 # Core application logic
 │   ├── ai               # AI-related functionalities
-│   ├── bot              # Bot-related functionalities
 │   ├── callbacks        # Callback functions
 │   ├── constants.py     # Constant values used across the project
 │   ├── databases        # Database-related functionalities
@@ -79,15 +78,14 @@ $ python bot.py
 │   ├── services         # Service layer for business logic
 │   └── utils            # Utility functions
 ├── docker-compose.yaml  # Docker Compose file for the project
-├── hishel_cache.db      # Cache database file
 ├── logging.ini          # Logging configuration file
 ├── main.py              # Entry point for the FastAPI server
 ├── migrations           # Database migration scripts
 ├── notebooks            # Jupyter notebooks for experiments and documentation
 ├── poetry.lock          # Poetry lock file for dependencies
 ├── pyproject.toml       # Poetry configuration file
-├── scripts              # Utility scripts
-└── test.py              # Test script
+├── test                 # Unit test
+└── scripts              # Utility scripts
 ```
 
 ## TODO list
