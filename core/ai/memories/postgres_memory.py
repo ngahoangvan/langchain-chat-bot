@@ -1,11 +1,12 @@
 
-from langchain_community.chat_message_histories import SQLChatMessageHistory
-from configs.common_config import settings
 from langchain.chains.conversation.memory import ConversationSummaryMemory
+from langchain_community.chat_message_histories import SQLChatMessageHistory
+from langchain_core.messages import SystemMessage
 from langchain_openai import ChatOpenAI
+
+from configs.common_config import settings
 from core.enumerate import OpenAIModel
 from core.utils.common_utils import calculate_token
-from langchain_core.messages import SystemMessage
 
 
 class PostgresChatMemoryMessage:
@@ -76,10 +77,10 @@ class PostgresChatMemoryMessage:
         self._update_chat_history()
         return self.chat_history
 
-    def get_memory(self) -> ConversationSummaryMemory:
-        """Get the ConversationSummaryMemory instance.
+    # def get_memory(self) -> ConversationSummaryMemory:
+    #     """Get the ConversationSummaryMemory instance.
 
-        Returns:
-            ConversationSummaryMemory: The memory instance managing this chat
-        """
-        return self.memory
+    #     Returns:
+    #         ConversationSummaryMemory: The memory instance managing this chat
+    #     """
+    #     return self.memory
