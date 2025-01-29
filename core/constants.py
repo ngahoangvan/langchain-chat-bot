@@ -21,3 +21,8 @@ DEFAULT_OPENAI_REQUEST_TIMEOUT = 25
 
 # Embedding Models
 EMBEDDING_3_DIMENSIONS = 1024
+
+ENGINE_DICT = {
+    'postgresql': 'postgresql+asyncpg',
+    'mysql': 'mysql+asyncmy',
+}

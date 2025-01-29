@@ -1,6 +1,8 @@
 import os
 import tiktoken
 
+from core.constants import ENGINE_DICT
+
 
 def join_paths(*args):
     return os.path.join(*args)
@@ -13,10 +15,6 @@ def calculate_token(text: str) -> int:
 
 
 def get_async_db_uri(uri) -> str:
-    ENGINE_DICT = {
-        'postgresql': 'postgresql+asyncpg',
-        'mysql': 'mysql+asyncmy',
-    }
     for key, value in ENGINE_DICT.items():
         if uri.startswith(f'{key}://'):
             uri = uri.replace(f'{key}://', f'{value}://')
