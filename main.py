@@ -3,23 +3,20 @@ from fastapi import FastAPI, HTTPException, status
 from fastapi.exceptions import RequestValidationError
 from openai import APIError
 from pydantic import ValidationError
+# from slack_bolt.adapter.fastapi.async_handler import AsyncSlackRequestHandler
+# from slack_bolt.adapter.socket_mode import SocketModeHandler
+# from slack_bolt.async_app import AsyncApp
 from starlette.middleware.cors import CORSMiddleware
-from slack_bolt.adapter.fastapi.async_handler import AsyncSlackRequestHandler
-from slack_bolt.adapter.socket_mode import SocketModeHandler
-from slack_bolt.async_app import AsyncApp
-from configs.common_config import settings
-from core.bot.slack_bot import SlackBot
-from fastapi import FastAPI, Request, Depends
 
-
+# from bots.slack_bot import SlackBot
+# from configs.common_config import settings
 from core.exceptions.exception_handler import (
     openai_request_error_handle,
     unexpected_error_handle,
     unexpected_exception_handle,
-    validation_error_handler
+    validation_error_handler,
 )
 from core.loggers import configure_logging
-
 
 logger = configure_logging(__name__)
 load_dotenv(override=True)
